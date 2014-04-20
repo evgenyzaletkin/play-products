@@ -1,4 +1,4 @@
-@(title: String)(content: Html)(implicit lang: Lang)
+@(title: String)(content: Html)(implicit lang: Lang, flash: Flash)
 
 <!DOCTYPE html>
 
@@ -24,7 +24,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="@routes.Products.list()">@Messages("products.list")</a></li>
-                        <li><a href="#contact">@Messages("products.new")</a></li>
+                        <li><a href="@routes.Products.newProduct()">@Messages("products.new")</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -32,6 +32,21 @@
 
         <div class="container" role="main">
 
+            <br>
+            <br>
+
+            <br>
+
+            @if(flash.get("success").isDefined){
+                <div class="alert alert-success">
+                @flash.get("success")
+                </div>
+            }
+
+            @if(flash.get("error").isDefined){
+                <div class="alert alert-error">
+                @flash.get("error")
+                </div>}
             @content
         </div><!-- /.container -->
     </body>
