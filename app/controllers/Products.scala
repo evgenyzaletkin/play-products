@@ -42,6 +42,7 @@ object Products extends Controller{
       productForm.bindFromRequest
     else
       productForm
+
     Ok(views.html.products.editProduct(form))
   }
 
