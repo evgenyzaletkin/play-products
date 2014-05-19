@@ -36,11 +36,20 @@ object Products extends Controller{
     product.map(p => Ok(views.html.products.details(p))).getOrElse(NotFound)
   }
 
+  def showByName(name: String) = Action{
+    implicit request =>
+    val product = Product.findByName(name)
+    product.map(p => Ok(views.html.products.details(p))).getOrElse(NotFound)
+  }
+
   def newProduct = Action{
     implicit request =>
-    val form = if (flash.get(flashError).isDefined)
-      productForm.bindFromRequest
-    else
+      val form = if (flash.get(flashError).isDefined) {
+      Logger.error("Form has errors " + flash.data)
+      productForm.bind(flash.data)
+    }
+      else
+
       productForm
 
     Ok(views.html.products.editProduct(form))

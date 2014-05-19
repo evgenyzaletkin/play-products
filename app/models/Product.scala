@@ -24,6 +24,8 @@ object Product{
 
   def findByEan(ean: Long) = products.find(_.ean == ean)
 
+  def findByName(name: String) = products.find(_.name == name)
+
   def add(product: Product) = {
     products = products + product
   }
